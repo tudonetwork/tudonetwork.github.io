@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<title>Ramon's JavaScript Array Game</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{font-family:Arial, Helvetica, sans-serif;}
+button{
+border:0px;padding:10px;border-radius:4px;background:blue;color:#FFF;font-size:20px
+}
+</style>
+</head>
+<body>
+
+<h2>Ramon's JavaScript Array Game</h2>
+<p id="descrip">Let's tranning about Javascript Array. Create your own array in this game.</p>
+
+<button onclick="StartGameJS()">Start the Game</button>
+<p id="demo"></p>
+
+<script>
+
+function StartGameJS(){
+
+  var lenght = prompt("Please enter the length of your array (1 to x)", "");
+
+  if (lenght != null && lenght != "") {
+    GameJS(lenght);
+  }
+
+}
+
+function GameJS(lenght){
+
+  // initiation the array
+  var myarray = [];
+  
+  for(var x = 1; x <= lenght;x++){
+    var val = prompt("Enter the value of index (" + x +")", "");
+    myarray[x] = (val==null || val=="")? "" : val;
+  }
+  
+  
+  var text = '<br><hr><br>This is your Array:<br><h1>var myarray = [';
+  myarray.forEach(loopfunc);
+  text = text.slice(0, -1);
+  text += "];</h1>";
+  document.getElementById("demo").innerHTML = text;
+
+  function loopfunc(v) {
+    text += '"' + v + '",';
+  } 
+
+}
+</script>
+
+</body>
+</html>
+
