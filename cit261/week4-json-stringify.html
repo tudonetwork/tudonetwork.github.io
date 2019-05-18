@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body, html {
+  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0.2));
+  height: 100%;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.hero-image {
+  height: 100%;
+  position: relative;
+}
+
+.hero-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #000;
+}
+
+.header {
+    font-family: Arial;
+    background-color: MidnightBlue;
+    color: white;
+ 	  margin-top: 2em;   
+    padding: .25em;
+    border-top: 1pt solid SteelBlue;
+    border-bottom: 1pt solid SteelBlue;
+}
+pre{width: 800px;
+    overflow: scroll;
+    padding: 30px 0px;
+    border: 1px solid #191870;
+    border-radius: 6px;}
+
+.button{
+  border-radius:6px; 
+  border: 1px solid #191870;
+  color:#FFF;
+  font-size:20px;
+  padding:8px;
+  background: #191870}
+
+</style>
+</head>
+<body>
+
+<div class="hero-image">
+  <div class="hero-text">
+      <input class="button" type="button" id="clickme" onclick="showResults()" value="Show Javascript Object">
+      <div id="results1"></div>
+      <div id="results2"></div>
+  </div>
+</div>
+<script>
+
+var movies = [ 
+  { title: "John Wick 3: Parabellum (2019)", rating: 8.3 }, 
+  { title: "Avengers: Endgame (2019)", rating: 8.8 }, 
+  { title: "Pokemon Detective Pikachu", rating: 7.0 }, 
+  { title: "Captain Marvel", rating: 7.1 },
+  { title: "Aladdin (2019)", rating: 6.2 },
+  { title: "Godzilla: King of the Monsters", rating: 6.1 } 
+];
+
+
+function writeToDom(title, content, id) {
+  var e = document.getElementById("results" + id)
+  e.innerHTML = "<div class='header'>" + title + ":</div><div><pre>" + content + "</pre></div>";
+}
+
+function showResults() {
+    writeToDom('Plain', JSON.stringify(movies), 1);
+    writeToDom('Formatted', JSON.stringify(movies, null, 4), 2);
+}
+</script>
+</body>
+</html>

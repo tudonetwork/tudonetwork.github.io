@@ -43,6 +43,11 @@ li{list-style-type:none}
       <li>Low: <span id="low"></span>&deg; F</li>
       <li>Wind: <span id="wind"></span>&deg; F</li>
     </p>
+    <p>
+      <a href="#" onclick="showCodeWeather()">See Weather Json Result</a>
+      <a href="#" onclick="showCodeImage()">See Background Image Json Result</a>
+    </p>
+
 
 
 
@@ -50,6 +55,8 @@ li{list-style-type:none}
 </div>
 <div id="copyright"></div>
 <script>
+var weatherDataString;
+var imgDataString;
 
 GetWeatherData();
 
@@ -61,6 +68,7 @@ function loadBackground(descrip) {
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       var imgData = JSON.parse(xhttp.responseText); 
+      imgDataString = JSON.stringify(xhttp.responseText); 
       document.body.style.backgroundImage = "url('" + imgData[0].urls.full +"')";
       document.getElementById('copyright').innerHTML = "Background by <a href='"+ imgData[0].links.html +"' target='_blank'>"+imgData[0].user.name+ "</a> / Ramon Andrade - CIT 261 - 2019 ";
     }
@@ -75,7 +83,9 @@ function GetWeatherData(){
 	weatherRequest.send();
 
 	weatherRequest.onload = function () {
+    console.log(weatherRequest.responseText);
 	    var weatherData = JSON.parse(weatherRequest.responseText);  
+      weatherDataString = JSON.stringify(weatherRequest.responseText);  
       document.getElementById('name').innerHTML = weatherData.name + ", " + weatherData.sys.country;
 	    document.getElementById('current').innerHTML = weatherData.main.temp;
 	    document.getElementById('high').innerHTML = weatherData.main.temp_max;
@@ -86,6 +96,18 @@ function GetWeatherData(){
       loadBackground(weatherData.weather[0].main);
       
 	}
+
+}
+
+
+function showCodeWeather(){
+  alert(weatherDataString);
+}
+
+
+function showCodeImage(){
+
+  alert(imgDataString);
 
 }
 </script>
