@@ -68,7 +68,7 @@ function loadBackground(descrip) {
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       var imgData = JSON.parse(xhttp.responseText); 
-      imgDataString = JSON.stringify(xhttp.responseText); 
+      imgDataString = xhttp.responseText; 
       document.body.style.backgroundImage = "url('" + imgData[0].urls.full +"')";
       document.getElementById('copyright').innerHTML = "Background by <a href='"+ imgData[0].links.html +"' target='_blank'>"+imgData[0].user.name+ "</a> / Ramon Andrade - CIT 261 - 2019 ";
     }
@@ -85,16 +85,14 @@ function GetWeatherData(){
 	weatherRequest.onload = function () {
     console.log(weatherRequest.responseText);
 	    var weatherData = JSON.parse(weatherRequest.responseText);  
-      weatherDataString = JSON.stringify(weatherRequest.responseText);  
+      weatherDataString = weatherRequest.responseText;  
       document.getElementById('name').innerHTML = weatherData.name + ", " + weatherData.sys.country;
 	    document.getElementById('current').innerHTML = weatherData.main.temp;
 	    document.getElementById('high').innerHTML = weatherData.main.temp_max;
 	    document.getElementById('low').innerHTML = weatherData.main.temp_min;
 	    document.getElementById('wind').innerHTML = weatherData.wind.speed;
       document.getElementById('descrip').innerHTML = weatherData.weather[0].main;
-
       loadBackground(weatherData.weather[0].main);
-      
 	}
 
 }
