@@ -1,0 +1,138 @@
+<html>
+    <head>            
+        <title>Ejemplo LocalStorage</title>
+<style>
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(57, 57, 57, 0.5));
+    background-size: cover;
+    background-repeat: no-repeat;
+   
+  }
+  
+  .hero-image {
+     height: 100%;
+     background: #00000047;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+  }
+  
+  .hero-text {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+  }
+  
+  .hero-text p button {
+    outline: 0;
+    display: inline-block;
+    padding: 10px 25px;
+    color: black;
+    background-color: #ddd;
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  .hero-text p button:hover {
+    background-color: #555;
+    color: white;
+  }
+  input{outline: none;     text-align: center; background: transparent; border: 0px; color:#FFF}
+
+  ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: white;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: white;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: white;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: white;
+}
+#btnsac{display:none}
+  </style>
+  </head>
+  <body onload='loadData(); loadBackground(); document.getElementById("nametxt").focus();'>
+  
+  <div class="hero-image">
+    <div class="hero-text">
+      <h1><input style="font-size:50px" type="text" onchange="UpdateData()"  placeholder="My name is...." id="nametxt"></h1>
+      <p><input style="font-size:30px;font-style: italic;" type="text" onchange="UpdateData()" placeholder="I will ...." id="dreamtxt"></p>
+      <p id="btnsac" style="margin-top:20%;"><button  onclick="selectBackground(2)"><</button> Background <button onclick="selectBackground(1)">></button></p>
+    </div>
+  </div>
+<script>
+function loadData(){
+
+var nn = localStorage.getItem("Name");
+var dd = localStorage.getItem("Dream");
+
+if(nn!=null) document.getElementById("nametxt").value = nn;
+if(dd!=null) document.getElementById("dreamtxt").value = dd;
+
+}
+
+function UpdateData(){        
+
+var nom = document.getElementById("nametxt").value;
+var ddm = document.getElementById("dreamtxt").value;
+
+localStorage.setItem("Name", nom);
+localStorage.setItem("Dream", ddm);
+
+}   
+
+function loadBackground() {
+
+    var imgData = localStorage.getItem("backgrouns"); 
+    if(imgData==null){
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("GET", "https://api.unsplash.com/photos/random?client_id=26f7ff3ddb829a882ed4ddf2bb84eb482a6e0abe587b49a3a5603e61c255f2e7&query=happiness&count=10&orientation=landscape", true);
+        xhttp.send();
+
+        xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var imgData = JSON.stringify(xhttp.responseText); 
+            localStorage.setItem("backgrouns", imgData);
+            document.getElementById("btnsac").style.display = "block";
+            selectBackground();
+        }
+        };
+    }else{
+        document.getElementById("btnsac").style.display = "block";
+        selectBackground();
+    }
+    
+}
+
+var bgid = (localStorage.getItem("backgroun_number")!=null) ? localStorage.getItem("backgroun_number") : 0;
+
+function selectBackground(tipo = 0){
+
+    var imgData = JSON.parse(JSON.parse(localStorage.getItem("backgrouns"))); 
+
+    if(tipo == 1){ // next
+        bgid = (bgid <= 8)? bgid + 1 : 9;
+    }else if(tipo==2){
+        bgid = (bgid >= 1)? bgid - 1 : 0;
+    }
+
+    localStorage.setItem("backgroun_number", bgid);
+
+    document.body.style.backgroundImage = "url('" + imgData[bgid].urls.full +"')";
+
+}
+
+</script>
+              
+</body> 
+</html>
