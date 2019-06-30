@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>CSS Transforms</title>
+<style type="text/css" media="screen">
+body,
+html {
+  padding: 0 10px;
+  margin: 0;
+  background: #0e0f11;
+  color: #ecf0f1;
+  font-family: 'Open Sans', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  overflow: hidden;
+}
+* {
+  box-sizing: border-box;
+}
+h1,
+p {
+  text-align: center;
+}
+p {
+  width: 100%;
+  max-width: 500px;
+  margin: auto;
+}
+a:link,
+a:hover,
+a:active,
+a:visited {
+  transition: color 150ms;
+  color: #95a5a6;
+  text-decoration: none;
+}
+a:hover {
+  color: #7f8c8d;
+  text-decoration: underline;
+}
+.contain {
+  width: 100%;
+}
+.row {
+  overflow: scroll;
+  width: 100%;
+}
+.row__inner {
+  transition: 450ms -webkit-transform;
+  transition: 450ms transform;
+  transition: 450ms transform, 450ms -webkit-transform;
+  font-size: 0;
+  white-space: nowrap;
+  margin: 70.3125px 0;
+  padding-bottom: 10px;
+}
+.tile {
+  position: relative;
+  display: inline-block;
+  width: 250px;
+  height: 140.625px;
+  margin-right: 10px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 450ms all;
+  -webkit-transform-origin: center left;
+          transform-origin: center left;
+}
+.movie_img {
+  width: 250px;
+  height: 140.625px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.movie_details {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  font-size: 10px;
+  opacity: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
+  transition: 450ms opacity;
+
+
+}
+@keyframes zoominoutsinglefeatured {
+    0% {
+        transform: scale(1,1);
+    }
+    50% {
+        transform: scale(1.2,1.2);
+    }
+    100% {
+        transform: scale(1,1);
+    }
+}
+
+.movie_details:after,
+.movie_details:before {
+  animation: zoominoutsinglefeatured 1s infinite ;
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: #000;
+}
+.movie_details:after {
+  margin-top: -25px;
+  margin-left: -25px;
+  width: 40px;
+  height: 40px;
+  border: 3px solid #ecf0f1;
+  line-height: 40px;
+  text-align: center;
+  border-radius: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 1;
+}
+.movie_details:before {
+  content: '▶';
+  left: 0;
+  width: 100%;
+  font-size: 30px;
+  margin-left: 0px;
+  margin-top: -18px;
+  text-align: center;
+  z-index: 2;
+
+
+}
+.tile:hover .movie_details {
+opacity: 1;
+}
+.movie_title {
+position: absolute;
+bottom: 0;
+padding: 10px;
+}
+.row__inner:hover {
+-webkit-transform: translate3d(-62.5px, 0, 0);
+transform: translate3d(-62.5px, 0, 0);
+}
+.row__inner:hover .tile {
+opacity: 0.3;
+}
+.row__inner:hover .tile:hover {
+-webkit-transform: scale(1.5);
+transform: scale(1.5);
+opacity: 1;
+}
+.tile:hover ~ .tile {
+-webkit-transform: translate3d(125px, 0, 0);
+transform: translate3d(125px, 0, 0);
+}
+
+
+.close-button{
+	cursor:pointer
+}
+
+.buttonsScroll{
+	color:#FFF;
+	background:#7f8c8d;
+	border-radius:5px;
+	padding:6px 4px;
+	font-size:20px;
+	border:0px;
+	margin:0px 10px;
+	outline:none;
+}
+.buttonsScroll:hover{
+	animation: zoominoutsinglefeatured 1s infinite;
+}
+
+#viewvideo{  opacity: 0;  pointer-events: none; background:#000; color:#FFF; width: 0%;  position: absolute; width:100%; z-index: 999999; border:0px; height: 100%; bottom: 0px; left: 0px; }
+
+#frameviewvideo{ border:0px;width:100%;height:calc(100% - 40px)}
+
+.buttonsview{	width:100%;height:40px;text-align:right;font-size:40px;padding-right:30px;}
+
+</style>
+</head>
+<body>
+<div style="width: 100%; float: left; position: absolute; top: 0px;">
+<h1>BYU CIT 360</h1>
+<p>Ramon Andrade - CSS3  + Javascript</p>
+</div>
+
+<div class="contain">
+	  
+		<div id="divmovies" class="row">
+		  <div  class="row__inner">
+	  
+			<div class="tile" vid="oRHlEF0wN38">
+			  <div class="movie_media">
+				<img class="movie_img" src="https://i.ytimg.com/vi/oRHlEF0wN38/hqdefault.jpg" alt=""  />
+			  </div>
+			  <div class="movie_details">
+				<div class="movie_title">
+					A Flood of Rescuers
+				</div>
+			  </div>
+			</div>
+	  
+			<div class="tile" vid="papYlDdXkVw" >
+			  <div class="movie_media">
+				<img class="movie_img" src="https://i.ytimg.com/vi/papYlDdXkVw/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIpCGAFwAQ==&rs=AOn4CLDAWiRK_X4N40NMjOpmm0KQkKKqFQ" alt=""  />
+			  </div>
+			  <div class="movie_details">
+				<div class="movie_title">
+						One More Day to Live—What Would You Do?
+				</div>
+			  </div>
+			</div>
+	  
+			<div class="tile" vid="xsA8u2byx2c">
+			  <div class="movie_media">
+				<img class="movie_img" src="https://i.ytimg.com/vi/xsA8u2byx2c/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIpCGAFwAQ==&rs=AOn4CLAdSyiRzq-c9yoXMq4qcm0SLIL_8g" alt=""  />
+			  </div>
+			  <div class="movie_details">
+				<div class="movie_title">
+						Answer the Call | Abe Mills
+				</div>
+			  </div>
+			</div>
+	  
+			<div class="tile" vid="PdMs4jMUjjQ">
+			  <div class="movie_media">
+				<img class="movie_img" src="https://i.ytimg.com/vi/PdMs4jMUjjQ/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIpCGAFwAQ==&rs=AOn4CLBkBMVYtoVjZESBNteXsv7vU48Tsg" alt=""  />
+			  </div>
+			  <div class="movie_details">
+				<div class="movie_title">
+						Wheelz: Overcoming is Possible
+				</div>
+			  </div>
+			</div>
+	  
+			<div class="tile" vid="TLVj3yC-IpY">
+			  <div class="movie_media">
+				<img class="movie_img" src="https://i.ytimg.com/vi/TLVj3yC-IpY/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIpCGAFwAQ==&rs=AOn4CLBDqQMyDJW8OVvi-12zJYnmjDdm4w" alt=""  />
+			  </div>
+			  <div class="movie_details">
+				<div class="movie_title">
+						Love at Home - Music Video
+				</div>
+			  </div>
+			</div>
+	  
+			<div class="tile" vid="VlB0WoF18V0">
+			  <div class="movie_media">
+				<img class="movie_img" src="https://i.ytimg.com/vi/VlB0WoF18V0/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIpCGAFwAQ==&rs=AOn4CLCOX2kz9NTkwA8BDJo7H_mBd3xAJg" alt=""  />
+			  </div>
+			  <div class="movie_details">
+				<div class="movie_title">
+					Songs Sung and Unsung
+				</div>
+			  </div>
+			</div>
+	  
+			<div class="tile" vid="JPv-B0wn6F0">
+			  <div class="movie_media">
+				<img class="movie_img" src="https://i.ytimg.com/vi/JPv-B0wn6F0/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIpCGAFwAQ==&rs=AOn4CLBJom44UZ09iClwxTL7pNnH8ji_6w" alt=""  />
+			  </div>
+			  <div class="movie_details">
+				<div class="movie_title">
+						Seeing Green | Jill Thomas – Hope Works
+				</div>
+			  </div>
+			</div>
+
+		  </div>
+		</div>
+	  
+	  </div>
+
+	<div style="width: 100%; float: left; position: absolute; bottom: 20px;text-align:center">
+		<button id="slideBack" class="buttonsScroll" type="button">Prev</button>
+		<button id="slide" class="buttonsScroll" type="button">Next</button>
+	</div>
+
+<div id="viewvideo"><div class="buttonsview"><span class="close-button" onclick="closeButton()">x</span></div><iframe id="frameviewvideo" src=""></iframe>
+<script>
+/*
+Javascript
+Javascript events (Buttons)
+CSS animation
+CSS Transformation
+CSS transition
+DOM Document Object 
+*/
+
+
+/* button view video*/
+var openView = document.getElementsByClassName("tile");
+
+var functionView = function(e) {
+	document.getElementById("viewvideo").style.WebkitTransition = "all 1.5s ease-out"; 
+	document.getElementById("viewvideo").style.transition = "all 1.5s ease-out"; 
+	document.getElementById("viewvideo").style.pointerEvents = "auto"; 
+	document.getElementById("viewvideo").style.opacity = "1"; 
+		
+
+	var x = this.getAttribute("vid");
+	document.getElementById("frameviewvideo").setAttribute("src", "https://www.youtube.com/embed/" + x + "?autoplay=1");
+}
+
+for (var i = 0; i < openView.length; i++) {
+    openView[i].addEventListener('click', functionView, false);
+}
+
+
+/* button close video*/
+function closeButton() {
+
+	document.getElementById("viewvideo").style.pointerEvents = "none"; 
+	document.getElementById("viewvideo").style.opacity = "0"; 
+	document.getElementById("frameviewvideo").setAttribute("src", "");
+
+};
+
+/* button prev and next video*/
+var button = document.getElementById('slide');
+button.onclick = function () {
+    var container = document.getElementById('divmovies');
+    sideScroll(container,'right',25,100,10);
+};
+
+var back = document.getElementById('slideBack');
+back.onclick = function () {
+    var container = document.getElementById('divmovies');
+    sideScroll(container,'left',25,100,10);
+};
+
+function sideScroll(element,direction,speed,distance,step){
+    scrollAmount = 0;
+    var slideTimer = setInterval(function(){
+        if(direction == 'left'){
+            element.scrollLeft -= step;
+        } else {
+            element.scrollLeft += step;
+        }
+        scrollAmount += step;
+        if(scrollAmount >= distance){
+            window.clearInterval(slideTimer);
+        }
+    }, speed);
+}
+
+
+</script>
+
+
+</body>
+</html>
