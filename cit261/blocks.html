@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html>
+<style>
+*{outline:none}
+.mydiv {
+    border-radius:5px;
+    position:absolute;
+    z-index: 9;
+    text-align: left;
+    resize: both;
+    overflow: auto;
+    min-width:50px;
+    min-height:50px;
+
+    -moz-box-shadow:2px 2px 5px rgba(33,33,33,1);
+    -webkit-box-shadow: 2px 2px 5px rgba(33,33,33,.7);
+    box-shadow: 2px 2px 5px rgba(33,33,33,.7);
+
+    -moz-transition:-moz-transform .1s linear;
+    -o-transition:-o-transform .15s linear;
+    -webkit-transition:-webkit-transform .15s linear;
+
+    -webkit-transition: background-color 100ms linear;
+    -moz-transition: background-color 100ms linear;
+    -o-transition: background-color 100ms linear;
+    -ms-transition: background-color 100ms linear;
+    transition: background-color 100ms linear;
+}
+
+.mydivheader {
+  cursor: move;
+  background-color: #00000059;
+  height:15px;
+  width:100%;
+  position:absolute;
+}
+.mydivbody{
+    position: absolute;
+    top: 16px;
+    height: calc(99% - 30px);
+    width: 99%;
+    color: #111;
+    font-family: cursive;
+    padding: 0.5%;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+
+.mydiv-effect-over {
+ -moz-box-shadow:5px 5px 7px rgba(33,33,33,1);
+  -webkit-box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+  box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+
+  transition: box-shadow 0.3s ease-in-out;
+  -webkit-transition: box-shadow 0.3s ease-in-out;
+    -moz-transition: box-shadow 0.3s ease-in-out;
+    -o-transition: box-shadow 0.3s ease-in-out;
+    -ms-transition: box-shadow 0.3s ease-in-out;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.toggle {
+  font-family:arial;
+  cursor:pointer;
+  background-color: #000000;
+  text-align: center;
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  position: absolute;
+  margin: auto;
+  top: 2px;
+  left: 5px;
+  transition: 0.7s;
+  z-index:9999;
+}
+
+.toggle:hover
+{
+    -webkit-transform: scale(1.3);
+    -ms-transform: scale(1.3);
+    transform: scale(1.3);
+}
+
+.centerdiv{top:25px!important;left:22px!important;background-color: white;transform:scale(3)!important;}
+.centerdiv2{top:25px!important;left:25px!important;background-color: white;}
+.centerdiv2 .toggle_span{ display:block!important}
+.menu {
+  background-color: white;
+  box-shadow: 1px 1px 6px #0000004a;
+  height: 20px;
+  width: 20px;
+  transform: scale(0);
+  border-radius: 50%;
+  border-color: #c87f8a;
+  position: absolute;
+  margin: auto;
+  transition: 0.7s;
+  z-index:9988;
+}
+
+.menu a {
+  display: inline-block;
+  position: absolute;
+  font-size: 7px;
+  height:5px;
+  border-radius:3px;
+  width:5px;
+
+}
+
+.menu a:nth-child(1){
+  background:#f44336;
+  margin-top: 1px;
+    margin-left: 7px;
+}
+
+.menu a:nth-child(2){
+  background:#2196f3;
+  margin-top: 4px;
+    margin-left: 13px;
+}
+
+.menu a:nth-child(3){
+  background:#8bc34a;
+  margin-top: 11px;
+    margin-left: 12px;
+}
+
+.menu a:nth-child(4){
+  background:#ffc107;
+  margin-top: 13px;
+    margin-left: 5px;
+}
+
+.menu a:nth-child(5){
+    background: #fffcf8;
+    margin-top: 5px;
+    margin-left: 1px;
+}
+
+.menu a:hover
+{
+    -webkit-transform: scale(1.3);
+    -ms-transform: scale(1.3);
+    transform: scale(1.3);
+}
+
+body {
+    background-image: url('bg_mac.jpg');
+    background-size:cover;
+	font-size:arial;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+body.sidemenu-right #sidemenu {
+    right: 250px;
+    margin-right: -250px;
+}
+body.sidemenu-left #sidemenu {
+    left: 250px;
+    margin-left: -250px;
+}
+body.sidemenu-left.toggle-sidemenu {
+    padding-left: 250px;
+}
+body.sidemenu-right.toggle-sidemenu {
+    padding-right: 250px;
+}
+body.sidemenu-left.toggle-sidemenu #sidemenu, body.sidemenu-right.toggle-sidemenu #sidemenu{
+    width: 250px;
+}
+#sidemenu {
+    z-index: 9999;
+    position: fixed;
+    height: 100%;
+    width: 0;
+    top: 0;
+    overflow-x: none;
+    overflow-y: auto;
+    background: #282828;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.menu-left-nav ul{ margin-top: 50px}
+.menu-left-nav ul li { list-style: none; margin-bottom:10px;}
+.menu-left-nav ul li a{position: relative; text-decoration: none; font-family:Arial, Helvetica, sans-serif; width:100%;height:auto;font-size:18px;color:#FFF; background: transparent;}
+
+#sidemenu-toggle{z-index: 9999;height:40px;width: 40px; background:transparent; position: absolute;}
+
+.nav-icon {
+  background:transparent;
+  margin: 1em;
+  width: 40px;
+}
+.nav-icon:after, 
+.nav-icon:before, 
+.nav-icon div {
+  background-color: #000;
+  border-radius: 3px;
+  content: '';
+  display: block;
+  height: 5px;
+  margin: 7px 0;
+  transition: all .2s ease-in-out;
+}
+
+.nav-icon-hover:before {
+  transform: translateY(12px) rotate(135deg);
+  -webkit-transform: translateY(12px) rotate(135deg);
+      -moz-transform: translateY(12px) rotate(135deg);
+        -o-transform: translateY(12px) rotate(135deg);
+       -ms-transform: translateY(12px) rotate(135deg);
+           transform: translateY(12px) rotate(135deg);
+}
+
+.nav-icon-hover:after {
+  transform: translateY(-12px) rotate(-135deg);
+  -webkit-transform: translateY(-12px) rotate(-135deg);
+      -moz-transform: translateY(-12px) rotate(-135deg);
+        -o-transform: translateY(-12px) rotate(-135deg);
+       -ms-transform: translateY(-12px) rotate(-135deg);
+}
+
+.nav-icon-hover div {
+  transform: scale(0);
+  -webkit-transform: scale(0);
+      -moz-transform: scale(0);
+        -o-transform: scale(0);
+       -ms-transform: scale(0);
+}
+</style>
+
+<body class="sidemenu-left" onload="RenderBlocks(); SetDragabble();">
+    <div id="sidemenu">
+        <nav class="menu-left-nav">
+            <ul>
+                <li><a onclick="AddBlock()" href="#">New Block</a></li>
+                <li><a href="javascript:void()" onclick="setBackground('bg_mac.jpg')">Background MAC</a></li>
+                <li><a href="javascript:void()" onclick="setBackground('bg_windows.jpg')">Background Windows</a></li>
+                <li><a href="javascript:void()" onclick="setBackground('bg_ubuntu.jpg')">Background Ubuntu</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="container-fluid" id="board" style="width:100%;height:100%;">
+        <a href="javascript:void(0)" onclick="openMenu()" id="sidemenu-toggle">
+            <div id="nav-menu-icon" class="nav-icon">
+                <div></div>
+            </div>
+        </a>
+    
+</div>
+
+<script>
+var blc = {};
+var colors = {1: "#f44336", 2: "#2196f3", 3: "#8bc34a", 4: "#ffc107"};
+
+// SETTING BACKGROUND
+var selectedBG = localStorage.getItem("bg");
+if(selectedBG!=undefined && selectedBG!=null){
+    setBackground(selectedBG);
+}
+
+function genHash(){
+   return Math.floor(Math.random() * 10000) 
+   + Math.floor(Math.random() * 99910) 
+   + Math.floor(Math.random() * 10000);
+}
+
+function openMenu() {
+    var x = document.getElementsByTagName("BODY")[0];
+    x.classList.toggle("toggle-sidemenu");
+
+    var x2 = document.getElementById("nav-menu-icon");
+    x2.classList.toggle("nav-icon-hover");
+}
+
+function setBackground(bg){
+    document.body.style.backgroundImage = "url('"+bg+"')";
+    localStorage.setItem("bg", bg);
+}
+
+// JAVASCRIPT OBJECTS
+// Constructor function for Blocks objects
+function Block(id, color, positionx, positiony, width, height, text) {
+  this.blockID = id;
+  this.blockColor = color;
+  this.blockPositionX = positionx;
+  this.blockPositionY = positiony;
+  this.blockWidth = width;
+  this.blockHeight = height;
+  this.blockText = text;
+}
+
+function AddBlock(){
+    // JAVASCRIPT OBJECTS
+    var bid = genHash();
+    var w = Math.floor(Math.random() * 100) + 10;
+    var h = Math.floor(Math.random() * 100) + 10;
+
+    blc[bid] = new Block(bid, "#ffc107", w + "px", h + "px", "200px", "200px", "");
+    SaveBlocks();
+    RenderBlocks();
+}
+
+// will render the blocks from localstora
+function RenderBlocks(){
+
+// JAVASCRIPT LOCALSTORAGE OBJECT
+var storedBc = JSON.parse(localStorage.getItem("blocks"));
+if(storedBc!=null && storedBc!=undefined){
+    blc = storedBc;
+
+    // REMOVE ALL ELEMENTS
+    var paras = document.getElementsByClassName('mydiv');
+    while(paras[0]) {
+        paras[0].parentNode.removeChild(paras[0]);
+    }
+
+    Object.keys(storedBc).forEach(function(key) {
+        
+        var idblock = storedBc[key].blockID;
+        var bgcolor = storedBc[key].blockColor;
+        var positionx = storedBc[key].blockPositionX;
+        var positiony = storedBc[key].blockPositionY;
+        var width = storedBc[key].blockWidth;
+        var height = storedBc[key].blockHeight;
+        var text = storedBc[key].blockText;
+        
+        var bc = 
+        '<div id="'+idblock+'" onmouseover="EffectOverDiv('+idblock+');" onmouseout="EffectOutDiv('+idblock+');" class="mydiv" style="background-color:'+bgcolor+';top:'+positionx+';left:'+positiony+';width:'+width+';height:'+height+';">'+
+            '<div id="block_'+idblock+'header" class="mydivheader">'+
+            ' <div class="toggle" id="toggle_'+idblock+'" onclick="expand('+idblock+')"><span class="toggle_span" style="display:none;">x</span></div> '+
+            ' <div class="menu" id="menu_'+idblock+'">'+
+            ' <a onclick="selectColor('+idblock+',1)" href="javascript:void(0);"></a>'+
+            ' <a onclick="selectColor('+idblock+',2)" href="javascript:void(0);"></a>'+
+            ' <a onclick="selectColor('+idblock+',3)" href="javascript:void(0);"></a>'+
+            ' <a onclick="selectColor('+idblock+',4)" href="javascript:void(0);"></a>'+
+            ' <a onclick="deleteBlock('+idblock+')" href="javascript:void(0);"><img src="https://image.flaticon.com/icons/png/128/25/25214.png" height="5" width="5"></a>'+
+            '</div>'+
+        '</div>'+
+        '<div id="mydivbody_'+idblock+'" class="mydivbody" onkeyup="SaveText('+idblock+')" contentEditable="true">'+
+        ' '+text+'</div>'+
+        '</div>';
+        
+        // DOM: insert the div in the board
+        document.getElementById("board").insertAdjacentHTML("beforeend", bc);
+
+    });
+}
+
+SetDragabble();
+}
+
+function selectColor(id, col){
+    var cc = colors[col];
+    document.getElementById(id).style.backgroundColor = cc;
+    blc[id].blockColor = cc;
+    SaveBlocks();
+}
+
+function deleteBlock(id){
+    // DOM: remove div
+    var element = document.getElementById(id);
+    element.parentNode.removeChild(element);
+
+    // JAVASCRIPT OBJECTS
+    delete blc[id];
+    SaveBlocks();
+}
+
+function SaveText(id){
+    blc[id].blockText = document.getElementById("mydivbody_" + id).innerText;
+    SaveBlocks();
+}
+
+function EffectOverDiv(id){
+    document.getElementById(id).classList.add("mydiv-effect-over");
+}
+
+function EffectOutDiv(id){
+    document.getElementById(id).classList.remove("mydiv-effect-over");
+
+    // JAVASCRIPT EVENTS: ONRESIZE
+    var elmnt = document.getElementById(id);
+    var w = elmnt.offsetWidth;
+    var h = elmnt.offsetHeight;
+    blc[id].blockWidth = w + "px";
+    blc[id].blockHeight = h + "px";
+    SaveBlocks();
+}
+
+// Save the object Blocks in localstorage
+function SaveBlocks(){
+
+    
+	localStorage.setItem("blocks", JSON.stringify(blc));
+}
+
+//Make the DIV element draggagle:
+function SetDragabble(){
+    var elementList = document.getElementsByClassName("mydiv");
+    for(var x = 0; x<elementList.length;x++){
+        var ele = elementList[x];
+        dragElement(ele);
+        
+    }
+}
+
+function expand(id){
+    document.getElementById("toggle_" + id).classList.toggle("centerdiv2");
+    document.getElementById("menu_" + id).classList.toggle("centerdiv");
+}
+
+  // JAVASCRIPT EVENTS: ONMOUSEUP, ONMOUSEMOVE, ONMOUSEDOWN
+function dragElement(elmnt) {
+
+  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  if (document.getElementById("block_" + elmnt.id + "header")) {
+    /* if present, the header is where you move the DIV from:*/
+    document.getElementById("block_" + elmnt.id + "header").onmousedown = dragMouseDown;
+  } else {
+    /* otherwise, move the DIV from anywhere inside the DIV:*/
+    elmnt.onmousedown = dragMouseDown;
+  }
+
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // get the mouse cursor position at startup:
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    // call a function whenever the cursor moves:
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // calculate the new cursor position:
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // set the element's new position:
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+
+    // SAVE IN OBJECTS
+    blc[elmnt.id].blockPositionX = elmnt.style.top;
+    blc[elmnt.id].blockPositionY = elmnt.style.left;
+
+  }
+
+  function closeDragElement() {
+    /* stop moving when mouse button is released:*/
+    document.onmouseup = null;
+    document.onmousemove = null;
+
+    SaveBlocks();
+  }
+}
+</script>
+
+</body>
+</html>
