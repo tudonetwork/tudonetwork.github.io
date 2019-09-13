@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css?family=Lato|Source+Sans+Pro&display=swap');
+
+
+
+
+body { 
+  background-color: #FFFFFF;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+#content {
+  width: 960px;
+  margin: 0 auto;
+  background-color: #FFFFFF;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+  color: #6495ED;
+  padding: 10px;
+  text-align: center;
+  font-family: 'Lato', sans-serif;
+  font-weight: 100;
+} 
+
+h1{font-size:40px}
+
+p {
+  padding: 10px;
+  color:#606060;
+  font-family: 'Source Sans Pro', sans-serif;
+  text-align: center;
+}
+
+header{padding:20px 0px;}
+#banner{height:400px;margin-top:30px}
+
+.hero-image {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url("https://cdn.glitch.com/0d156dfa-1a03-41b1-827b-d78e50e8c95b%2Fbanner.jpg?v=1568325347996");
+  height: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.hero-text {
+  text-align: center;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-shadow: 1px 1px 5px #ccc;
+}
+
+.hero-text p{ color: white!important; }
+
+nav {
+  width: 500px;
+  float: right;
+}
+
+nav a {
+  color:#606060;
+  padding: 0px 36px;
+  text-decoration: none;
+}
+nav li {
+  width:100px;
+  display: inline;
+  
+  list-style-type: none;
+}
+
+.btnlearn{ background:#606060;color:#fff;padding:10px 30px;font-size:20px;text-decoration:none;}
+.sec1{
+  
+padding:30px 0px 40px 0px
+}
+
+.sec1 p{
+padding: 10px 100px;
+}
+
+.img-best{width:80%}
+
+
+.img2{width:100%;}
+
+.sec3{
+  text-align: center;
+}
+
+.hspec {
+  width:100%;
+  color: #0c59cf;
+}
+
+input, textarea{padding:10px;width:70%;font-size:24px}
+
+.sec1, .sec2, .sec3, .sec4, .sec5, header, footer{width:100%;float:left}
+
+.fot-sec1, .fot-sec1{width:100%;float:left;margin:20px 0px;text-align:center}
+
+#logo {
+  width: 300px;
+}
+
+
+
+footer{margin-top:30px;border-top: 1px solid #7a7a7a}
+
+.socialmedia {
+  padding: 10px;
+  margin:30px 0px
+}
+.icon {
+  width: 55px;
+  height: 55px;
+}
+#info {
+  font-size: 14px;
+}
+
+
+
+
